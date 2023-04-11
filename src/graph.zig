@@ -35,7 +35,7 @@ pub fn GraphType(comptime Node: type, comptime Edge: type) type {
 
         pub fn find_node(self: Self, node: Node) GraphError!usize {
             const i = for (self.nodes.items, 0..) |curr, i| {
-                if (curr == node) break i;
+                if (std.meta.eql(curr, node)) break i;
             } else return GraphError.NodeNotFound;
             return i;
         }
